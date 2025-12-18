@@ -1,0 +1,16 @@
+.distinction {
+  background-color: cadetblue;
+}
+
+.pass {
+  background-color: lightgreen;
+}
+
+.fail {
+  background-color: cornsilk;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+}

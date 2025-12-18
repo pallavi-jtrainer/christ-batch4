@@ -1,0 +1,51 @@
+import { Component } from '@angular/core';
+import { Student } from '../models/student.model';
+
+@Component({
+  selector: 'app-list-all-students',
+  standalone: false,
+  templateUrl: './list-all-students.html',
+  styleUrl: './list-all-students.css',
+})
+export class ListAllStudents {
+  students: Student[] =
+    [
+      {
+        id: 1, name: "Prithvi", marks: 92
+      },
+      { id: 2, name: "Upasana", marks: 71 },
+      { id: 3, name: "Prasad", marks: 26 }
+    ]
+
+  newName = '';
+  newMarks = 0;
+
+  addNewStudent() {
+    const newId = this.students.length > 0 ? Math.max(...this.students.map(s => s.id)) + 1 : 1;
+
+    if (!this.newName.trim() || this.newMarks <= 0) {
+      alert("Name and marks are mandatory");
+      return;
+    }
+    const student = {
+      id: newId,
+      name: this.newName,
+      marks: this.newMarks
+    }
+
+    this.students.push(student);
+
+    this.newName = '';
+    this.newMarks = 0;
+  }
+
+  deleteStudent(id: any) {
+    this.students = this.students.filter(s => s.id !== id);
+  }
+
+  getResult(marks: number) {
+    if (marks >= 75) return 'distinction';
+    if (marks >= 40) return 'pass';
+    return 'fail';
+  }
+}

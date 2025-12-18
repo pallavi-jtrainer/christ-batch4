@@ -1,0 +1,54 @@
+<div class="container">
+  <div>
+    <div>
+      <input type="text" id="name" [(ngModel)]="newName" class="form-control" placeholder="Enter name" />
+    </div>
+    <div>
+      <input type="number" id="marks" [(ngModel)]="newMarks" class="form-control" placeholder="Enter marks" />
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="addNewStudent()">Add Student</button>
+    </div>
+
+
+  </div>
+  <div class="card" style="margin-top: 2%;">
+    <div class="card-head">
+      <h3>List of Students</h3>
+    </div>
+    <div class="card-body">
+      <table class="student-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Marks</th>
+            <th>Result</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of students" [ngClass]="getResult(s.marks)">
+            <td>{{s.id}}</td>
+            <td>{{s.name}}</td>
+            <td [ngStyle]="{
+              color: s.marks &lt; 40? 'red' : 'black'
+            }">{{s.marks}}</td>
+            <td [ngSwitch]="getResult(s.marks)">
+              <span *ngSwitchCase="'distinction'">Distinction</span>
+              <span *ngSwitchCase="'pass'">Pass</span>
+              <span *ngSwitchDefault>Fail</span>
+            </td>
+            <td>
+              <span><button class="btn btn-warning">Edit</button></span>
+              <span>
+                <button class="btn btn-danger" style="margin-left:1%" (click)="deleteStudent(s.id)">Delete</button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

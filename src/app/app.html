@@ -1,0 +1,29 @@
+<div>
+  <!-- <h3>Hello {{name}}</h3> -->
+  <!-- Counter: {{counter}}
+  <div>
+    <button (click)="incrementCounter()">Increment Counter</button>
+  </div>
+  <div style="margin-top: 1%;">
+    <button (click)="handleButtonClick()" [disabled]="isAvailable">Click Here</button>
+  </div> -->
+  <!-- <div>
+    <input type="number" placeholder="Enter Salary: " id="salary" [(ngModel)]="salary" />
+    <div>
+      <button (click)="calculateBonus()">Calculate Total Salary</button>
+    </div>
+    <div [style.color]="'green'">
+      {{employeeName}} - Salary: {{salary}}
+    </div>
+  </div>
+</div> -->
+
+  <div>
+    {{employeeName | uppercase}}
+    <br />
+    {{salary | currency: 'INR'}}
+    <br />
+    {{doj | date: 'MMM-dd-yyyy'}}
+  </div>
+
+  <!-- <app-list-all-students></app-list-all-students> -->
