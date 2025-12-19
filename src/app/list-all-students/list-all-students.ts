@@ -11,14 +11,15 @@ export class ListAllStudents {
   students: Student[] =
     [
       {
-        id: 1, name: "Prithvi", marks: 92
+        id: 1, name: "Prithvi", marks: 92, isEditable: false
       },
-      { id: 2, name: "Upasana", marks: 71 },
-      { id: 3, name: "Prasad", marks: 26 }
+      { id: 2, name: "Upasana", marks: 71, isEditable: false },
+      { id: 3, name: "Prasad", marks: 26, isEditable: false }
     ]
 
   newName = '';
   newMarks = 0;
+  studentMarks = 0;
 
   addNewStudent() {
     const newId = this.students.length > 0 ? Math.max(...this.students.map(s => s.id)) + 1 : 1;
@@ -30,7 +31,8 @@ export class ListAllStudents {
     const student = {
       id: newId,
       name: this.newName,
-      marks: this.newMarks
+      marks: this.newMarks,
+      isEditable: false
     }
 
     this.students.push(student);
@@ -47,5 +49,16 @@ export class ListAllStudents {
     if (marks >= 75) return 'distinction';
     if (marks >= 40) return 'pass';
     return 'fail';
+  }
+
+  editStudent(student: Student) {
+    this.students.forEach(s => s.isEditable = false);
+    student.isEditable = true;
+    this.studentMarks = student.marks;
+  }
+
+  saveStudentMarks(student: Student) {
+    student.marks = this.studentMarks;
+    student.isEditable = false;
   }
 }

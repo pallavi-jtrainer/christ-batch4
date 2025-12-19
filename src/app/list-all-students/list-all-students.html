@@ -28,24 +28,65 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let s of students" [ngClass]="getResult(s.marks)">
+          <!-- <tr *ngFor="let s of students" [ngClass]="getResult(s.marks)">
             <td>{{s.id}}</td>
             <td>{{s.name}}</td>
             <td [ngStyle]="{
               color: s.marks &lt; 40? 'red' : 'black'
-            }">{{s.marks}}</td>
+            }">
+              <span *ngIf="!s.isEditable">{{s.marks}}</span>
+              <span *ngIf="s.isEditable">
+                <input type="number" min="0" max="100" [(ngModel)]="studentMarks" />
+              </span>
+            </td>
             <td [ngSwitch]="getResult(s.marks)">
               <span *ngSwitchCase="'distinction'">Distinction</span>
               <span *ngSwitchCase="'pass'">Pass</span>
               <span *ngSwitchDefault>Fail</span>
             </td>
             <td>
-              <span><button class="btn btn-warning">Edit</button></span>
+              <span><button class="btn btn-warning" (click)="editStudent(s)">Edit</button></span>
+              <span><button style="margin-left: 1%" class="btn btn-info"
+                  (click)="saveStudentMarks(s)">Save</button></span>
+              <span>
+                <button class="btn btn-danger" style="margin-left:1%" (click)="deleteStudent(s.id)">Delete</button>
+              </span>
+            </td>
+          </tr> -->
+          @for (s of students; track s.id) {
+          <tr [ngClass]="getResult(s.marks)">
+            <td>{{s.id}}</td>
+            <td>{{s.name}}</td>
+            <td>
+              @if (!s.isEditable) {
+              <span>{{s.marks}}</span>
+              } @else {
+              <span><input type="number" min="0" max="100" [(ngModel)]="studentMarks" /></span>
+              }
+            </td>
+            <td>
+              @switch(getResult(s.marks)) {
+              @case('distinction') {
+              <span>Distinction</span>
+              }
+              @case('pass') {
+              <span>Pass</span>
+              }
+              @default {
+              <span>Fail</span>
+              }
+              }
+            </td>
+            <td>
+              <span><button class="btn btn-warning" (click)="editStudent(s)">Edit</button></span>
+              <span><button style="margin-left: 1%" class="btn btn-info"
+                  (click)="saveStudentMarks(s)">Save</button></span>
               <span>
                 <button class="btn btn-danger" style="margin-left:1%" (click)="deleteStudent(s.id)">Delete</button>
               </span>
             </td>
           </tr>
+          }
         </tbody>
       </table>
     </div>
